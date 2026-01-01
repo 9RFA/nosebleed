@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosebleed Stocks | Discord Shop</title>
+    <title>NosebleedStocks | Discord Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -15,22 +15,23 @@
         }
         
         :root {
-            /* iOS Glass Colors */
+            /* iOS White Glass Colors */
             --primary: #5865F2;
-            --primary-light: rgba(88, 101, 242, 0.25);
+            --primary-light: rgba(88, 101, 242, 0.2);
             --secondary: #57F287;
-            --secondary-light: rgba(87, 242, 135, 0.25);
+            --secondary-light: rgba(87, 242, 135, 0.2);
             --accent: #EB459E;
-            --accent-light: rgba(235, 69, 158, 0.25);
+            --accent-light: rgba(235, 69, 158, 0.2);
             --dark: #0C0E11;
             --darker: #08090C;
-            --glass-white: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-white: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-highlight: rgba(255, 255, 255, 0.3);
             --text: #FFFFFF;
             --text-secondary: rgba(255, 255, 255, 0.7);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --neon-glow: 0 0 40px rgba(88, 101, 242, 0.5);
-            --glass-blur: blur(40px) saturate(200%);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            --neon-glow: 0 0 40px rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(40px) saturate(180%);
         }
         
         body {
@@ -70,7 +71,7 @@
         .loader-logo {
             font-size: 4rem;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -96,7 +97,7 @@
         .loader-progress {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.5));
             border-radius: 10px;
             animation: loading 2.5s ease-in-out forwards;
         }
@@ -107,19 +108,19 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: rgba(88, 101, 242, 0.3);
+            background: rgba(255, 255, 255, 0.2);
             pointer-events: none;
             z-index: 9998;
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s, background 0.3s;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--glass-border);
         }
         
         .cursor-follower.active {
             width: 60px;
             height: 60px;
-            background: rgba(88, 101, 242, 0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .cursor-dot {
@@ -127,15 +128,15 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--primary);
+            background: #ffffff;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
             transition: transform 0.1s;
         }
         
-        /* Maximum Glass Background */
-        .glass-bg {
+        /* Advanced GFX Background */
+        .gfx-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -143,50 +144,72 @@
             height: 100%;
             z-index: -3;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(88, 101, 242, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(235, 69, 158, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(87, 242, 135, 0.15) 0%, transparent 50%);
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
             backdrop-filter: var(--glass-blur);
+            overflow: hidden;
         }
         
-        /* Floating Glass Elements */
-        .floating-glass {
+        /* GFX Animated Particles */
+        .particles {
             position: fixed;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.15;
-            animation: floatGlass 30s infinite linear;
+            width: 100%;
+            height: 100%;
             z-index: -2;
         }
         
-        .glass-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            top: 10%;
-            left: 10%;
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: floatParticle 20s infinite linear;
+        }
+        
+        /* White Glass Blobs */
+        .glass-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.08;
+            animation: floatGlass 30s infinite linear;
+            z-index: -2;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            top: -100px;
+            left: -100px;
             animation-delay: 0s;
         }
         
-        .glass-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent);
+        .blob-2 {
+            width: 400px;
+            height: 400px;
             top: 60%;
             left: 80%;
             animation-delay: 10s;
         }
         
-        .glass-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--secondary);
+        .blob-3 {
+            width: 350px;
+            height: 350px;
             top: 80%;
             left: 20%;
             animation-delay: 20s;
         }
         
-        /* Maximum Glass Header */
+        .blob-4 {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            left: 70%;
+            animation-delay: 5s;
+        }
+        
+        /* Maximum White Glass Header */
         .header {
             position: fixed;
             top: 0;
@@ -201,9 +224,9 @@
         }
         
         .header-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -232,7 +255,7 @@
         
         .logo-icon i {
             font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -241,7 +264,7 @@
         .logo-text {
             font-size: 1.8rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--text), var(--text-secondary));
+            background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -274,10 +297,10 @@
         }
         
         .crypto-badge:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--glass-highlight);
             transform: translateY(-3px);
-            border-color: var(--primary);
-            box-shadow: 0 12px 40px rgba(88, 101, 242, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.1);
         }
         
         .crypto-icons {
@@ -301,7 +324,7 @@
         .hero {
             padding: 180px 0 100px;
             text-align: center;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
         }
@@ -310,7 +333,7 @@
             font-size: 4.5rem;
             font-weight: 900;
             margin-bottom: 25px;
-            background: linear-gradient(135deg, var(--text), var(--text-secondary));
+            background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -357,33 +380,33 @@
         
         .category-btn:hover {
             color: var(--text);
-            border-color: var(--primary);
+            border-color: rgba(255, 255, 255, 0.4);
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.3);
+            background: var(--glass-highlight);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
         }
         
         .category-btn.active {
-            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
             color: var(--text);
-            border-color: transparent;
-            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.15);
         }
         
-        /* Products Grid */
+        /* Products Grid - 3 per row */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 30px 120px;
+            padding: 0 40px 120px;
         }
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 35px;
         }
         
-        /* Maximum Glass Product Cards */
+        /* Maximum White Glass Product Cards */
         .product-card {
             background: var(--glass-white);
             border-radius: 28px;
@@ -408,9 +431,9 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, 
-                rgba(88, 101, 242, 0.1) 0%, 
-                rgba(235, 69, 158, 0.1) 50%, 
-                rgba(87, 242, 135, 0.1) 100%);
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.05) 50%, 
+                rgba(255, 255, 255, 0.08) 100%);
             opacity: 0;
             transition: opacity 0.5s;
             z-index: -1;
@@ -418,7 +441,7 @@
         
         .product-card:hover {
             transform: translateY(-15px) scale(1.03);
-            border-color: rgba(255, 255, 255, 0.3);
+            border-color: var(--glass-highlight);
             box-shadow: 
                 0 30px 70px rgba(0, 0, 0, 0.4),
                 0 0 0 1px rgba(255, 255, 255, 0.2),
@@ -441,10 +464,11 @@
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), #FF6B9D);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
             color: var(--text);
-            box-shadow: 0 6px 25px rgba(235, 69, 158, 0.4);
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             letter-spacing: 1px;
         }
         
@@ -470,7 +494,7 @@
         
         .product-icon {
             font-size: 2.2rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -515,7 +539,7 @@
         .product-price {
             font-size: 2.5rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--secondary), #2ECC71);
+            background: linear-gradient(135deg, var(--secondary), rgba(87, 242, 135, 0.8));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -531,7 +555,7 @@
             opacity: 0.8;
         }
         
-        /* Maximum Glass Buy Button */
+        /* Maximum White Glass Buy Button */
         .buy-button {
             width: 100%;
             padding: 22px;
@@ -567,12 +591,12 @@
         }
         
         .buy-button:hover {
-            background: linear-gradient(135deg, var(--primary), #9B59B6);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
             transform: translateY(-5px);
-            border-color: transparent;
+            border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 
-                0 20px 50px rgba(88, 101, 242, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+                0 20px 50px rgba(255, 255, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
         
         .buy-button:hover::before {
@@ -601,6 +625,13 @@
             50% { transform: translate(-30px, 30px) rotate(180deg); }
             75% { transform: translate(20px, 40px) rotate(270deg); }
             100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
         }
         
         @keyframes loading {
@@ -647,18 +678,29 @@
         .product-card:nth-child(8) { animation-delay: 1.9s; }
         
         /* Responsive Design - Mobile & Tablet */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             :root {
                 --glass-blur: blur(30px) saturate(180%);
             }
             
-            .hero-title {
-                font-size: 3.5rem;
+            .container {
+                max-width: 1200px;
+                padding: 0 30px 100px;
             }
             
             .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-                gap: 25px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
             }
             
             .cursor-follower, .cursor-dot {
@@ -804,7 +846,7 @@
             
             .product-card {
                 padding: 20px;
-            }
+            }http://localhost:3000/
             
             .product-title {
                 font-size: 1.4rem;
@@ -869,11 +911,13 @@
     <div class="cursor-follower" id="cursorFollower"></div>
     <div class="cursor-dot" id="cursorDot"></div>
     
-    <!-- Maximum Glass Background -->
-    <div class="glass-bg"></div>
-    <div class="floating-glass glass-1"></div>
-    <div class="floating-glass glass-2"></div>
-    <div class="floating-glass glass-3"></div>
+    <!-- Advanced GFX Background -->
+    <div class="gfx-bg"></div>
+    <div class="particles" id="particles"></div>
+    <div class="glass-blob blob-1"></div>
+    <div class="glass-blob blob-2"></div>
+    <div class="glass-blob blob-3"></div>
+    <div class="glass-blob blob-4"></div>
     
     <!-- Header -->
     <header class="header">
@@ -913,7 +957,7 @@
             <button class="category-btn" data-category="token">Nitro Tokens</button>
         </div>
         
-        <!-- Products Grid -->
+        <!-- Products Grid - 3 per row -->
         <div class="products-grid" id="productsGrid">
             <!-- Products will be dynamically loaded here -->
         </div>
@@ -1016,6 +1060,7 @@
         const pageLoader = document.getElementById('pageLoader');
         const cursorFollower = document.getElementById('cursorFollower');
         const cursorDot = document.getElementById('cursorDot');
+        const particlesContainer = document.getElementById('particles');
         const productsGrid = document.getElementById('productsGrid');
         const categoryFilter = document.getElementById('categoryFilter');
         const categoryBtns = document.querySelectorAll('.category-btn');
@@ -1025,6 +1070,9 @@
         
         // Initialize the shop
         function initializeShop() {
+            // Create particles
+            createParticles();
+            
             // Hide loader after delay
             setTimeout(() => {
                 pageLoader.classList.add('hidden');
@@ -1042,6 +1090,35 @@
             
             // Update copyright year
             document.querySelector('.footer p').innerHTML = `© ${new Date().getFullYear()} Nosebleed Stocks Discord Shop. All rights reserved.`;
+        }
+        
+        // Create GFX particles
+        function createParticles() {
+            const particleCount = isTouchDevice ? 30 : 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = Math.random() * 8 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation
+                const duration = Math.random() * 20 + 20;
+                const delay = Math.random() * 20;
+                particle.style.animation = `floatParticle ${duration}s infinite ${delay}s linear`;
+                
+                // Random opacity
+                particle.style.opacity = Math.random() * 0.1 + 0.05;
+                
+                particlesContainer.appendChild(particle);
+            }
         }
         
         // Cursor Follower System
@@ -1092,7 +1169,7 @@
             });
         }
         
-        // Render products to the grid
+        // Render products to the grid - 3 per row
         function renderProducts(productsToRender) {
             productsGrid.innerHTML = '';
             
@@ -1148,7 +1225,7 @@
                     
                     // Enhanced click animation
                     this.style.transform = 'scale(0.95)';
-                    this.style.background = 'linear-gradient(135deg, var(--accent), var(--primary))';
+                    this.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.15))';
                     
                     // Add ripple effect
                     const rect = this.getBoundingClientRect();
@@ -1252,8 +1329,8 @@
                             const centerX = rect.width / 2;
                             const centerY = rect.height / 2;
                             
-                            const angleY = (x - centerX) * 0.01;
-                            const angleX = (centerY - y) * 0.01;
+                            const angleY = (x - centerX) * 0.008;
+                            const angleX = (centerY - y) * 0.008;
                             
                             card.style.transform = `
                                 perspective(1200px) 
@@ -1262,6 +1339,11 @@
                                 translateY(-15px) 
                                 scale(1.03)
                             `;
+                            
+                            // Dynamic glass highlight
+                            const highlightX = (x / rect.width) * 100;
+                            const highlightY = (y / rect.height) * 100;
+                            card.style.background = `radial-gradient(circle at ${highlightX}% ${highlightY}%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1) 70%)`;
                         }
                     });
                 });
@@ -1271,6 +1353,7 @@
                     const cards = document.querySelectorAll('.product-card');
                     cards.forEach(card => {
                         card.style.transform = 'translateY(-15px) scale(1.03)';
+                        card.style.background = 'var(--glass-white)';
                     });
                 });
             }
@@ -1288,17 +1371,28 @@
                 });
             }
             
-            // Parallax effect for floating glass elements
+            // Parallax effect for glass blobs
             document.addEventListener('mousemove', (e) => {
                 if (isTouchDevice) return;
                 
-                const x = (e.clientX / window.innerWidth - 0.5) * 30;
-                const y = (e.clientY / window.innerHeight - 0.5) * 30;
+                const x = (e.clientX / window.innerWidth - 0.5) * 40;
+                const y = (e.clientY / window.innerHeight - 0.5) * 40;
                 
-                const glassElements = document.querySelectorAll('.floating-glass');
-                glassElements.forEach((el, index) => {
-                    const speed = 0.3 + (index * 0.15);
-                    el.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${index * 120}deg)`;
+                const blobs = document.querySelectorAll('.glass-blob');
+                blobs.forEach((blob, index) => {
+                    const speed = 0.2 + (index * 0.1);
+                    blob.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${index * 90}deg)`;
+                });
+            });
+            
+            // Animate particles on scroll
+            window.addEventListener('scroll', () => {
+                const particles = document.querySelectorAll('.particle');
+                const scrollY = window.scrollY;
+                
+                particles.forEach((particle, index) => {
+                    const speed = 0.1 + (index % 3) * 0.05;
+                    particle.style.transform = `translateY(${scrollY * speed}px)`;
                 });
             });
         }
